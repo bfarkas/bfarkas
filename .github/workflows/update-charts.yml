@@ -1,0 +1,37 @@
+name: Update workshop charts
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '23 4 * * *'
+  push:
+    branches: [main]
+    paths:
+      - scripts/generate_charts.py
+      - .github/workflows/update-charts.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: workshop-charts
+  cancel-in-progress: false
+
+jobs:
+  charts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Generate charts from GitHub contributions
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python3 scripts/generate_charts.py
+      - name: Commit updated charts
+        run: |
+          if ! git diff --quiet -- assets/generated; then
+            git config user.name 'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git add assets/generated
+            git commit -m 'Update workshop charts'
+            git push
+          fi
