@@ -10,13 +10,11 @@ Welcome to my corner of GitHub. Here you'll find experiments in AI-assisted tool
 
 ## ▸ Explore the workshop
 
-🌱 **[OctoSprout](https://github.com/bfarkas/octosprout)** — A Markdown-first, Git-backed workspace for capturing ideas, developing projects, and working with AI assistants. *Early development.*
+<img src="assets/inventory/header.svg" alt="Bastian's workshop inventory: select a project to explore" width="100%">
 
-🎨 **[Pixel Art Pipeline](https://github.com/bfarkas/pixelart-pipeline)** — A specification for turning sketches and references into reviewable pixel-art assets for retro handheld and desktop games. *Specification stage.*
+<a href="https://github.com/bfarkas/octosprout"><img src="assets/inventory/octosprout.svg" alt="OctoSprout: a Git-backed workspace for ideas and AI, in early development" width="24%"></a><a href="https://github.com/bfarkas/pixelart-pipeline"><img src="assets/inventory/pixelart-pipeline.svg" alt="Pixel Art Pipeline: a specification for retro game assets" width="24%"></a><a href="https://github.com/bfarkas/hardcover-rss"><img src="assets/inventory/hardcover-rss.svg" alt="Hardcover RSS: reading lists as RSS feeds" width="24%"></a><a href="https://github.com/bfarkas/deepseek-bridge"><img src="assets/inventory/deepseek-bridge.svg" alt="DeepSeek Bridge: a planned local AI delegation bridge" width="24%"></a>
 
-📚 **[Hardcover RSS](https://github.com/bfarkas/hardcover-rss)** — RSS feeds for Hardcover “want to read” lists.
-
-🤖 **[DeepSeek Bridge](https://github.com/bfarkas/deepseek-bridge)** — A planned local delegation bridge for Claude Code. *Implementation plan and scaffold.*
+<img src="assets/inventory/footer.svg" alt="" width="100%">
 
 ## ▸ More from the workbench
 
