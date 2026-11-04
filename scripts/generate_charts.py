@@ -10,8 +10,8 @@ import urllib.request
 OUT = Path(__file__).resolve().parents[1] / 'assets' / 'generated'
 QUERY = '''query($login:String!) { user(login:$login) { contributionsCollection { contributionCalendar { totalContributions weeks { contributionDays { contributionCount contributionLevel date } } } } } }'''
 THEMES = {
-    'dark': dict(bg='#15132b', frame='#e6a64a', text='#fff4cf', muted='#d6c9e8', colors=['#35334d', '#4d8aa3', '#69bcb0', '#c5db7e', '#ffd36b'], shadow='#0b0a1a'),
-    'light': dict(bg='#fff3d6', frame='#79502d', text='#332537', muted='#514050', colors=['#e0cfb4', '#46778e', '#35806f', '#608c34', '#a85c18'], shadow='#e5d2af'),
+    'dark': dict(bg='#15132b', frame='#df8c61', text='#fff4cf', muted='#d6c9e8', colors=['#35334d', '#4d8aa3', '#69bcb0', '#c5db7e', '#ffd36b'], shadow='#0b0a1a'),
+    'light': dict(bg='#fff3d6', frame='#df8c61', text='#332537', muted='#514050', colors=['#e0cfb4', '#46778e', '#35806f', '#608c34', '#a85c18'], shadow='#e5d2af'),
 }
 
 # A compact 5×7 bitmap alphabet, drawn as SVG paths so GitHub needs no font file.
