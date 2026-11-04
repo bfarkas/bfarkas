@@ -158,7 +158,7 @@ def profile_charts(calendar):
                f'<title>{title}</title><image width="{width}" height="224" href="data:image/png;base64,{encoded}"/>'
                f'<rect x="{inset}" y="68" width="{width-inset-25}" height="131" fill="#100d2e"/>'
                f'<g shape-rendering="crispEdges">{content}</g></svg>')
-        (OUT/f'{name}-profile.svg').write_text(svg)
+        (OUT/f'{name}-panel.svg').write_text(svg)
 
 
 def main():
