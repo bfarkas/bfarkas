@@ -129,29 +129,34 @@ def profile_charts(calendar):
     levels = {'NONE': 0, 'FIRST_QUARTILE': 1, 'SECOND_QUARTILE': 2,
               'THIRD_QUARTILE': 3, 'FOURTH_QUARTILE': 4}
     colors = ['#373575', '#5750ac', '#627bd7', '#48bfc6', '#68ffce']
-    plot = text(28, 78, f'{calendar["totalContributions"]} CONTRIBUTIONS IN THE LAST YEAR', 12, '#e7ddff')
+    plot = text(38, 88, f'{calendar["totalContributions"]} CONTRIBUTIONS IN THE LAST YEAR', 12, '#e7ddff')
     for x, week in enumerate(calendar['weeks'][-53:]):
         for day in week['contributionDays']:
             weekday = (dt.date.fromisoformat(day['date']).weekday() + 1) % 7
             totals[weekday] += day['contributionCount']
-            plot += f'<rect x="{28+x*9.5:g}" y="{86+weekday*16}" width="7.5" height="12" fill="{colors[levels[day["contributionLevel"]]]}"><title>{day["date"]}: {day["contributionCount"]} contributions</title></rect>'
+            plot += f'<rect x="{40+x*9}" y="{108+weekday*10}" width="8" height="8" fill="{colors[levels[day["contributionLevel"]]]}"><title>{day["date"]}: {day["contributionCount"]} contributions</title></rect>'
+    plot += text(40, 193, 'LESS', 12, '#e7ddff')
+    for i, color in enumerate(colors):
+        plot += f'<rect x="{83+i*12}" y="183" width="8" height="8" fill="{color}"/>'
+    plot += text(148, 193, 'MORE', 12, '#e7ddff')
     totals = calendar.get('weekdayTotals', totals)
     bars = ''
     maximum = max(totals, default=0)
     for i, (label, value) in enumerate(zip(['SUN','MON','TUE','WED','THU','FRI','SAT'], totals)):
-        x = 30+i*58
-        h = round(value/maximum*90) if maximum else 0
-        bars += f'<rect x="{x}" y="{190-h}" width="38" height="{h}" fill="#56ebbd"><title>{label}: {value} contributions</title></rect>'
+        x = 35+i*57
+        h = round(value/maximum*74) if maximum else 0
+        bars += f'<rect x="{x}" y="{178-h}" width="34" height="{h}" fill="#56ebbd"><title>{label}: {value} contributions</title></rect>'
         if h:
-            bars += f'<rect x="{x}" y="{190-h}" width="38" height="{min(3,h)}" fill="#e3ffd0"/>'
-        bars += text(x, 207, label, 12, '#f8e9bd')
-        bars += text(x, 185-h, value, 12, '#e7ddff')
+            bars += f'<rect x="{x}" y="{178-h}" width="34" height="{min(3,h)}" fill="#e3ffd0"/>'
+        bars += text(x, 194, label, 12, '#f8e9bd')
+        bars += text(x, 172-h, value, 12, '#e7ddff')
     for name, width, content in [('adventure-log',560,plot), ('workshop-rhythm',464,bars)]:
+        inset = 29 if name == 'adventure-log' else 18
         encoded = base64.b64encode((assets/f'{name}-frame.png').read_bytes()).decode()
         title = 'Contributions in the last year' if name == 'adventure-log' else 'Contributions by weekday'
         svg = (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} 224" role="img" aria-label="{title}">'
                f'<title>{title}</title><image width="{width}" height="224" href="data:image/png;base64,{encoded}"/>'
-               f'<rect x="22" y="67" width="{width-44}" height="145" fill="#100d2e"/>'
+               f'<rect x="{inset}" y="68" width="{width-inset-25}" height="131" fill="#100d2e"/>'
                f'<g shape-rendering="crispEdges">{content}</g></svg>')
         (OUT/f'{name}-profile.svg').write_text(svg)
 

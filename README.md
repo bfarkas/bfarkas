@@ -4,4 +4,4 @@
 
 <p align="center"><img src="assets/profile/map.png" width="100%" alt="A map of Bastian's interests: Brick Citadel for LEGO, Sixteen-Bit Shores for retro gaming, Starbound Library for science fiction, The Far-Reach Observatory for space exploration, Wandering Kitchen for cooking, and Sakura Harbour for Japan"></p>
 
-<p align="center"><img src="assets/generated/adventure-log-profile.svg" width="54.6875%" alt="The adventure log: live GitHub contribution activity over the last year"><img src="assets/generated/workshop-rhythm-profile.svg" width="45.3125%" alt="Workshop rhythm: live GitHub contributions by weekday"></p>
+<p align="center"><img src="assets/generated/adventure-log-profile.svg?v=2" width="54.6875%" alt="The adventure log: live GitHub contribution activity over the last year"><img src="assets/generated/workshop-rhythm-profile.svg?v=2" width="45.3125%" alt="Workshop rhythm: live GitHub contributions by weekday"></p>
