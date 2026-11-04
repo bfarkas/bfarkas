@@ -21,13 +21,13 @@ I've also explored [running ROS on the ZedBoard](https://github.com/bfarkas/zedb
 ## ▸ Adventure log
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/generated/adventure-log-dark.svg">
-  <img alt="Adventure log: contribution activity over the last year" src="assets/generated/adventure-log-light.svg">
+  <source media="(prefers-color-scheme: dark)" srcset="assets/generated/adventure-log-thin-dark.svg">
+  <img alt="Adventure log: contribution activity over the last year" src="assets/generated/adventure-log-thin-light.svg">
 </picture>
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/generated/workshop-rhythm-dark.svg">
-  <img alt="Workshop rhythm: contributions by weekday over the last year" src="assets/generated/workshop-rhythm-light.svg">
+  <source media="(prefers-color-scheme: dark)" srcset="assets/generated/workshop-rhythm-thin-dark.svg">
+  <img alt="Workshop rhythm: contributions by weekday over the last year" src="assets/generated/workshop-rhythm-thin-light.svg">
 </picture>
 
 <sub>Charts refresh daily from public GitHub contribution data. GitHub's own contribution calendar appears below.</sub>

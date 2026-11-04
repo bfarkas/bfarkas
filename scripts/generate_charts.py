@@ -121,13 +121,13 @@ def main():
     OUT.mkdir(parents=True, exist_ok=True)
     if '--placeholder' in sys.argv:
         for name, theme in THEMES.items():
-            for filename, title in [('adventure-log','THE ADVENTURE LOG'), ('workshop-rhythm','WORKSHOP RHYTHM')]:
+            for filename, title in [('adventure-log-thin','THE ADVENTURE LOG'), ('workshop-rhythm-thin','WORKSHOP RHYTHM')]:
                 (OUT / f'{filename}-{name}.svg').write_text(placeholder(theme, title))
         return
     if '--snapshot' in sys.argv:
         calendar = json.loads(Path(sys.argv[sys.argv.index('--snapshot') + 1]).read_text())
         for name, theme in THEMES.items():
-            for filename, svg in zip(['adventure-log', 'workshop-rhythm'], charts(calendar, theme)):
+            for filename, svg in zip(['adventure-log-thin', 'workshop-rhythm-thin'], charts(calendar, theme)):
                 (OUT / f'{filename}-{name}.svg').write_text(svg)
         return
     token = os.environ['GITHUB_TOKEN']
@@ -138,7 +138,7 @@ def main():
         raise RuntimeError(f'GitHub GraphQL failed: {data.get("errors", "user not found")}')
     calendar = data['data']['user']['contributionsCollection']['contributionCalendar']
     for name, theme in THEMES.items():
-        for filename, svg in zip(['adventure-log', 'workshop-rhythm'], charts(calendar, theme)):
+        for filename, svg in zip(['adventure-log-thin', 'workshop-rhythm-thin'], charts(calendar, theme)):
             (OUT / f'{filename}-{name}.svg').write_text(svg)
 
 if __name__ == '__main__':
