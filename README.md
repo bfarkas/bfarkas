@@ -10,7 +10,7 @@ Welcome to my corner of GitHub. Here you'll find experiments in AI-assisted tool
 
 ## ▸ Explore the workshop
 
-![Project inventory: OctoSprout, Pixel Art Pipeline, Hardcover RSS, and DeepSeek Bridge](assets/inventory/inventory.svg)
+<a href="https://github.com/bfarkas/octosprout"><img src="assets/inventory/octosprout.svg" alt="OctoSprout: ideas and AI workspace" width="25%"></a><a href="https://github.com/bfarkas/pixelart-pipeline"><img src="assets/inventory/pixelart-pipeline.svg" alt="Pixel Art Pipeline: retro art specification" width="25%"></a><a href="https://github.com/bfarkas/hardcover-rss"><img src="assets/inventory/hardcover-rss.svg" alt="Hardcover RSS: reading lists to RSS" width="25%"></a><a href="https://github.com/bfarkas/deepseek-bridge"><img src="assets/inventory/deepseek-bridge.svg" alt="DeepSeek Bridge: planned local AI delegation" width="25%"></a>
 
 [OctoSprout](https://github.com/bfarkas/octosprout) · [Pixel Art Pipeline](https://github.com/bfarkas/pixelart-pipeline) · [Hardcover RSS](https://github.com/bfarkas/hardcover-rss) · [DeepSeek Bridge](https://github.com/bfarkas/deepseek-bridge)
 

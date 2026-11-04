@@ -75,7 +75,7 @@ def text(x, y, value, size=14, color=None):
 def wrap(content, theme, height, title):
     return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 {height}" shape-rendering="crispEdges" role="img" aria-label="{title}">'
             f'<title>{title}</title><rect width="720" height="{height}" fill="{theme["bg"]}"/>'
-            f'<path d="M8 0H712V4H716V8H720V{height-8}H716V{height-4}H712V{height}H8V{height-4}H4V{height-8}H0V8H4V4H8Z M8 8V{height-8}H712V8Z" fill="{theme["frame"]}" fill-rule="evenodd"/>'
+            f'<path d="M6 0H714V2H718V6H720V{height-6}H718V{height-2}H714V{height}H6V{height-2}H2V{height-6}H0V6H2V2H6Z M6 4H4V6H4V{height-6}H6V{height-4}H714V{height-6}H716V6H714V4Z" fill="{theme["frame"]}" fill-rule="evenodd"/>'
             f'<g color="{theme["text"]}">{content}</g></svg>')
 
 def placeholder(theme, name):
