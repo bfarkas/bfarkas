@@ -1,33 +1,7 @@
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/workshop-cropped.png">
-  <source media="(prefers-color-scheme: light)" srcset="assets/workshop-day-cropped.png">
-  <img alt="A pixel-art workshop with books, a sprout, and a computer; purple tentacles peek out of the water" src="assets/workshop-day-cropped.png">
-</picture>
+<p align="center"><img src="assets/profile/header.png" width="100%" alt="Bastian's workshop: a moonlit pixel-art room with a computer, books and sprout; octopus tentacles peek from the water"></p>
 
-# Hello, I'm Bastian 👋
+<p align="center"><img src="assets/profile/inventory-heading.png" width="100%" alt="Project inventory"><br><a href="https://github.com/bfarkas/octosprout"><img src="assets/profile/octosprout.png" width="25%" alt="OctoSprout: ideas and AI workspace"></a><a href="https://github.com/bfarkas/pixelart-pipeline"><img src="assets/profile/pixelart-pipeline.png" width="25%" alt="Pixel Art Pipeline: retro art specification"></a><a href="https://github.com/bfarkas/hardcover-rss"><img src="assets/profile/hardcover-rss.png" width="25%" alt="Hardcover RSS: reading lists to RSS"></a><a href="https://github.com/bfarkas/deepseek-bridge"><img src="assets/profile/deepseek-bridge.png" width="25%" alt="DeepSeek Bridge: planned local AI delegation"></a><br><img src="assets/profile/inventory-footer.png" width="100%" alt=""></p>
 
-Welcome to my corner of GitHub. Here you'll find experiments in AI-assisted tools, pixel art, reading, and embedded systems.
+<p align="center"><img src="assets/profile/map.png" width="100%" alt="A map of Bastian's interests: Brick Citadel for LEGO, Sixteen-Bit Shores for retro gaming, Starbound Library for science fiction, The Far-Reach Observatory for space exploration, Wandering Kitchen for cooking, and Sakura Harbour for Japan"></p>
 
-## ▸ Explore the workshop
-
-<a href="https://github.com/bfarkas/octosprout"><img src="assets/inventory/octosprout.svg" alt="OctoSprout: ideas and AI workspace" width="25%"></a><a href="https://github.com/bfarkas/pixelart-pipeline"><img src="assets/inventory/pixelart-pipeline.svg" alt="Pixel Art Pipeline: retro art specification" width="25%"></a><a href="https://github.com/bfarkas/hardcover-rss"><img src="assets/inventory/hardcover-rss.svg" alt="Hardcover RSS: reading lists to RSS" width="25%"></a><a href="https://github.com/bfarkas/deepseek-bridge"><img src="assets/inventory/deepseek-bridge.svg" alt="DeepSeek Bridge: planned local AI delegation" width="25%"></a>
-
-[OctoSprout](https://github.com/bfarkas/octosprout) · [Pixel Art Pipeline](https://github.com/bfarkas/pixelart-pipeline) · [Hardcover RSS](https://github.com/bfarkas/hardcover-rss) · [DeepSeek Bridge](https://github.com/bfarkas/deepseek-bridge)
-
-## ▸ More from the workbench
-
-I've also explored [running ROS on the ZedBoard](https://github.com/bfarkas/zedboard-ros). Take a look through my repositories for more projects and experiments.
-
-## ▸ Adventure log
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/generated/adventure-log-thin-dark.svg">
-  <img alt="Adventure log: contribution activity over the last year" src="assets/generated/adventure-log-thin-light.svg">
-</picture>
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/generated/workshop-rhythm-thin-dark.svg">
-  <img alt="Workshop rhythm: contributions by weekday over the last year" src="assets/generated/workshop-rhythm-thin-light.svg">
-</picture>
-
-<sub>Charts refresh daily from public GitHub contribution data. GitHub's own contribution calendar appears below.</sub>
+<p align="center"><img src="assets/generated/adventure-log-profile.svg" width="54.6875%" alt="The adventure log: live GitHub contribution activity over the last year"><img src="assets/generated/workshop-rhythm-profile.svg" width="45.3125%" alt="Workshop rhythm: live GitHub contributions by weekday"></p>

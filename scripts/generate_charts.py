@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Render public GitHub contribution data as theme-aware workshop charts."""
+import base64
 import datetime as dt
 import json
 import os
@@ -117,6 +118,44 @@ def charts(calendar, theme):
     rhythm_svg = wrap(body, theme, 175, 'Workshop rhythm: contributions by weekday')
     return calendar_svg, rhythm_svg
 
+def profile_charts(calendar):
+    """Live SVG plots inside the selected mockup's illustrated frame slices.
+
+    Both slices share a 1024px page coordinate system, preserving the same
+    displayed border thickness as the inventory, regardless of viewport width.
+    """
+    assets = OUT.parent / 'profile'
+    totals = [0] * 7
+    levels = {'NONE': 0, 'FIRST_QUARTILE': 1, 'SECOND_QUARTILE': 2,
+              'THIRD_QUARTILE': 3, 'FOURTH_QUARTILE': 4}
+    colors = ['#373575', '#5750ac', '#627bd7', '#48bfc6', '#68ffce']
+    plot = text(28, 78, f'{calendar["totalContributions"]} CONTRIBUTIONS IN THE LAST YEAR', 12, '#e7ddff')
+    for x, week in enumerate(calendar['weeks'][-53:]):
+        for day in week['contributionDays']:
+            weekday = (dt.date.fromisoformat(day['date']).weekday() + 1) % 7
+            totals[weekday] += day['contributionCount']
+            plot += f'<rect x="{28+x*9.5:g}" y="{86+weekday*16}" width="7.5" height="12" fill="{colors[levels[day["contributionLevel"]]]}"><title>{day["date"]}: {day["contributionCount"]} contributions</title></rect>'
+    totals = calendar.get('weekdayTotals', totals)
+    bars = ''
+    maximum = max(totals, default=0)
+    for i, (label, value) in enumerate(zip(['SUN','MON','TUE','WED','THU','FRI','SAT'], totals)):
+        x = 30+i*58
+        h = round(value/maximum*90) if maximum else 0
+        bars += f'<rect x="{x}" y="{190-h}" width="38" height="{h}" fill="#56ebbd"><title>{label}: {value} contributions</title></rect>'
+        if h:
+            bars += f'<rect x="{x}" y="{190-h}" width="38" height="{min(3,h)}" fill="#e3ffd0"/>'
+        bars += text(x, 207, label, 12, '#f8e9bd')
+        bars += text(x, 185-h, value, 12, '#e7ddff')
+    for name, width, content in [('adventure-log',560,plot), ('workshop-rhythm',464,bars)]:
+        encoded = base64.b64encode((assets/f'{name}-frame.png').read_bytes()).decode()
+        title = 'Contributions in the last year' if name == 'adventure-log' else 'Contributions by weekday'
+        svg = (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} 224" role="img" aria-label="{title}">'
+               f'<title>{title}</title><image width="{width}" height="224" href="data:image/png;base64,{encoded}"/>'
+               f'<rect x="22" y="67" width="{width-44}" height="145" fill="#100d2e"/>'
+               f'<g shape-rendering="crispEdges">{content}</g></svg>')
+        (OUT/f'{name}-profile.svg').write_text(svg)
+
+
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
     if '--placeholder' in sys.argv:
@@ -126,6 +165,7 @@ def main():
         return
     if '--snapshot' in sys.argv:
         calendar = json.loads(Path(sys.argv[sys.argv.index('--snapshot') + 1]).read_text())
+        profile_charts(calendar)
         for name, theme in THEMES.items():
             for filename, svg in zip(['adventure-log-thin', 'workshop-rhythm-thin'], charts(calendar, theme)):
                 (OUT / f'{filename}-{name}.svg').write_text(svg)
@@ -137,6 +177,7 @@ def main():
     if data.get('errors') or not data.get('data', {}).get('user'):
         raise RuntimeError(f'GitHub GraphQL failed: {data.get("errors", "user not found")}')
     calendar = data['data']['user']['contributionsCollection']['contributionCalendar']
+    profile_charts(calendar)
     for name, theme in THEMES.items():
         for filename, svg in zip(['adventure-log-thin', 'workshop-rhythm-thin'], charts(calendar, theme)):
             (OUT / f'{filename}-{name}.svg').write_text(svg)
