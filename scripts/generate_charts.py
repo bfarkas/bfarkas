@@ -119,6 +119,11 @@ def charts(calendar, theme):
     return calendar_svg, rhythm_svg
 
 def profile_charts(calendar):
+    for theme in ("dark", "light"):
+        profile_chart_theme(calendar, theme)
+
+
+def profile_chart_theme(calendar, theme):
     """Live SVG plots inside the selected mockup's illustrated frame slices.
 
     Both slices share a 1024px page coordinate system, preserving the same
@@ -128,37 +133,55 @@ def profile_charts(calendar):
     totals = [0] * 7
     levels = {'NONE': 0, 'FIRST_QUARTILE': 1, 'SECOND_QUARTILE': 2,
               'THIRD_QUARTILE': 3, 'FOURTH_QUARTILE': 4}
-    colors = ['#373575', '#5750ac', '#627bd7', '#48bfc6', '#68ffce']
-    plot = text(38, 88, f'{calendar["totalContributions"]} CONTRIBUTIONS IN THE LAST YEAR', 12, '#e7ddff')
+    light = theme == 'light'
+    ink = '#49334f' if light else '#e7ddff'
+    colors = ['#e1d3ba', '#718bd1', '#377bb1', '#23876b', '#125b45'] if light else ['#373575', '#5750ac', '#627bd7', '#48bfc6', '#68ffce']
+    plot = text(38, 88, f'{calendar["totalContributions"]} CONTRIBUTIONS IN THE LAST YEAR', 12, ink)
     for x, week in enumerate(calendar['weeks'][-53:]):
         for day in week['contributionDays']:
             weekday = (dt.date.fromisoformat(day['date']).weekday() + 1) % 7
             totals[weekday] += day['contributionCount']
-            plot += f'<rect x="{40+x*9}" y="{108+weekday*10}" width="8" height="8" fill="{colors[levels[day["contributionLevel"]]]}"><title>{day["date"]}: {day["contributionCount"]} contributions</title></rect>'
-    plot += text(40, 193, 'LESS', 12, '#e7ddff')
+            plot += f'<rect x="{40+x*9}" y="{108+weekday*10}" width="6" height="6" fill="{colors[levels[day["contributionLevel"]]]}"><title>{day["date"]}: {day["contributionCount"]} contributions</title></rect>'
+    plot += text(40, 193, 'LESS', 12, ink)
     for i, color in enumerate(colors):
         plot += f'<rect x="{83+i*12}" y="183" width="8" height="8" fill="{color}"/>'
-    plot += text(148, 193, 'MORE', 12, '#e7ddff')
+    plot += text(148, 193, 'MORE', 12, ink)
     totals = calendar.get('weekdayTotals', totals)
     bars = ''
     maximum = max(totals, default=0)
     for i, (label, value) in enumerate(zip(['SUN','MON','TUE','WED','THU','FRI','SAT'], totals)):
         x = 35+i*57
         h = round(value/maximum*74) if maximum else 0
-        bars += f'<rect x="{x}" y="{178-h}" width="34" height="{h}" fill="#56ebbd"><title>{label}: {value} contributions</title></rect>'
+        bars += f'<rect x="{x}" y="{178-h}" width="34" height="{h}" fill="{"#267e68" if light else "#56ebbd"}"><title>{label}: {value} contributions</title></rect>'
         if h:
-            bars += f'<rect x="{x}" y="{178-h}" width="34" height="{min(3,h)}" fill="#e3ffd0"/>'
-        bars += text(x, 194, label, 12, '#f8e9bd')
-        bars += text(x, 172-h, value, 12, '#e7ddff')
+            bars += f'<rect x="{x}" y="{178-h}" width="34" height="{min(3,h)}" fill="{"#b4ce66" if light else "#e3ffd0"}"/>'
+        bars += text(x, 194, label, 12, ink)
+        bars += text(x, 172-h, value, 12, ink)
     for name, width, content in [('adventure-log',560,plot), ('workshop-rhythm',464,bars)]:
         inset = 29 if name == 'adventure-log' else 18
         encoded = base64.b64encode((assets/f'{name}-frame.png').read_bytes()).decode()
         title = 'Contributions in the last year' if name == 'adventure-log' else 'Contributions by weekday'
+        if light:
+            # Vector frame keeps the same page coordinates and stepped corners.
+            frame = ('<path d="M12 2H548L558 12V212L548 222H12L2 212V12Z" fill="#b69cbb"/>'
+                     '<path d="M14 6H546L554 14V210L546 218H14L6 210V14Z" fill="#684e78"/>'
+                     '<path d="M20 12H540L548 20V204L540 212H20L12 204V20Z" fill="#edc875"/>'
+                     '<path d="M24 16H536L544 24V200L536 208H24L16 200V24Z" fill="#fff3d6"/>'
+                     '<path d="M38 22H522L536 36V50L522 64H38L24 50V36Z" fill="#9d653a"/>'
+                     '<path d="M40 25H520L532 37V49L520 61H40L28 49V37Z" fill="#edc875"/>'
+                     '<path d="M42 28H518L528 38V48L518 58H42L32 48V38Z" fill="#fff3d6"/>')
+            # The right panel is narrower; scale only the frame geometry.
+            frame = f'<g transform="scale({width/560:g} 1)">{frame}</g>'
+            heading = 'THE ADVENTURE LOG' if name == 'adventure-log' else 'WORKSHOP RHYTHM'
+            frame += text(42, 49, heading, 17, '#49334f')
+        else:
+            frame = f'<image width="{width}" height="224" href="data:image/png;base64,{encoded}"/>'
+        background = '#fff3d6' if light else '#100d2e'
         svg = (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} 224" role="img" aria-label="{title}">'
-               f'<title>{title}</title><image width="{width}" height="224" href="data:image/png;base64,{encoded}"/>'
-               f'<rect x="{inset}" y="68" width="{width-inset-25}" height="131" fill="#100d2e"/>'
+               f'<title>{title}</title>{frame}'
+               f'<rect x="{inset}" y="68" width="{width-inset-25}" height="131" fill="{background}"/>'
                f'<g shape-rendering="crispEdges">{content}</g></svg>')
-        (OUT/f'{name}-panel.svg').write_text(svg)
+        (OUT/f'{name}-panel-{theme}.svg').write_text(svg)
 
 
 def main():
