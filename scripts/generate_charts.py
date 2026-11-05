@@ -162,21 +162,9 @@ def profile_chart_theme(calendar, theme):
         encoded = base64.b64encode((assets/f'{name}-frame.png').read_bytes()).decode()
         title = 'Contributions in the last year' if name == 'adventure-log' else 'Contributions by weekday'
         if light:
-            # Vector frame keeps the same page coordinates and stepped corners.
-            frame = ('<path d="M12 2H548L558 12V212L548 222H12L2 212V12Z" fill="#b69cbb"/>'
-                     '<path d="M14 6H546L554 14V210L546 218H14L6 210V14Z" fill="#684e78"/>'
-                     '<path d="M20 12H540L548 20V204L540 212H20L12 204V20Z" fill="#edc875"/>'
-                     '<path d="M24 16H536L544 24V200L536 208H24L16 200V24Z" fill="#fff3d6"/>'
-                     '<path d="M38 22H522L536 36V50L522 64H38L24 50V36Z" fill="#9d653a"/>'
-                     '<path d="M40 25H520L532 37V49L520 61H40L28 49V37Z" fill="#edc875"/>'
-                     '<path d="M42 28H518L528 38V48L518 58H42L32 48V38Z" fill="#fff3d6"/>')
-            # The right panel is narrower; scale only the frame geometry.
-            frame = f'<g transform="scale({width/560:g} 1)">{frame}</g>'
-            heading = 'THE ADVENTURE LOG' if name == 'adventure-log' else 'WORKSHOP RHYTHM'
-            frame += text(42, 49, heading, 17, '#49334f')
-        else:
-            frame = f'<image width="{width}" height="224" href="data:image/png;base64,{encoded}"/>'
-        background = '#fff3d6' if light else '#100d2e'
+            encoded = base64.b64encode((assets/f'{name}-frame-light.png').read_bytes()).decode()
+        frame = f'<image width="{width}" height="224" href="data:image/png;base64,{encoded}"/>'
+        background = '#fff7e4' if light else '#100d2e'
         svg = (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} 224" role="img" aria-label="{title}">'
                f'<title>{title}</title>{frame}'
                f'<rect x="{inset}" y="68" width="{width-inset-25}" height="131" fill="{background}"/>'
